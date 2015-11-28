@@ -84,5 +84,3 @@ def run(**args):
     t = s
     s = ""
     return t
-	
-print run()
