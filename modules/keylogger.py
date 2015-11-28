@@ -81,7 +81,8 @@ def run(**args):
         time.sleep(0.05)
         pythoncom.PumpWaitingMessages()
     num = 1
+    t = s
     s = ""
-    return s
+    return t
 	
 print run()
