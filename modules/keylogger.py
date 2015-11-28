@@ -82,6 +82,7 @@ def run(**args):
     while num < 100:
         time.sleep(0.02)
         pythoncom.PumpWaitingMessages()
+    k1.UnhookKeyboard()
     num = 1
     t = s
     s = ""
