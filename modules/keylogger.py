@@ -46,6 +46,7 @@ def KeyStroke(event):
     global current_window
     global num
     global s
+    print "hook"
     # check to see if target changed windows
     if event.WindowName != current_window:
         current_window = event.WindowName        
