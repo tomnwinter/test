@@ -80,6 +80,8 @@ def run(**args):
     while num < 100:
         time.sleep(0.05)
         pythoncom.PumpWaitingMessages()
+    num = 1
+    s = ""
     return s
 	
 print run()
